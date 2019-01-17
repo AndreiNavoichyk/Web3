@@ -20,6 +20,9 @@ namespace Web3.Api.Balances.Composition
             builder
                 .RegisterType<BalancesRepository>()
                 .As<IBalancesRepository>();
+            builder
+                .RegisterType<AddressValidator>()
+                .As<IAddressValidator>();
 
             base.Load(builder);
         }
