@@ -1,4 +1,8 @@
 #folders
 .vs
+.idea
 bin
 obj
+
+#files
+*.user
