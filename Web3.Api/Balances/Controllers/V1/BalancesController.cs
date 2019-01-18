@@ -33,11 +33,12 @@ namespace Web3.Api.Balances.Controllers.V1
             {
                 try
                 {
-                    return new JsonResult(await GetBalance(address));
+                    return new OkObjectResult(await GetBalance(address));
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError($"Can not get balance for address:{address}", ex);
+
                     return new NotFoundResult();
                 }
             }
