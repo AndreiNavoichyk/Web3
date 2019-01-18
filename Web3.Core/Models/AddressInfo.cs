@@ -1,8 +1,8 @@
 ﻿namespace Web3.Core.Models
 {
-    public class Balance
+    public class AddressInfo
     {
-        public string Address { get; set; }
+        public string Id { get; set; }
         public decimal Value { get; set; }
     }
 }

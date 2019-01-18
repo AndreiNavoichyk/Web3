@@ -1,6 +1,6 @@
 using Nethereum.Util;
 
-namespace Web3.Api.Balances
+namespace Web3.Api.Addresses
 {
     internal class AddressValidator : IAddressValidator
     {

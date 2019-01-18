@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Web3.Api.Balances.Composition;
+using Web3.Api.Addresses.Composition;
 
 namespace Web3.Api.Composition
 {
@@ -7,7 +7,7 @@ namespace Web3.Api.Composition
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterModule<BalancesModule>();
+            builder.RegisterModule<AddressesModule>();
             base.Load(builder);
         }
     }

@@ -4,9 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Web3.Core.Repositories;
 using Web3.InfuraRepository;
 
-namespace Web3.Api.Balances.Composition
+namespace Web3.Api.Addresses.Composition
 {
-    internal class BalancesModule : Module
+    internal class AddressesModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -18,8 +18,8 @@ namespace Web3.Api.Balances.Composition
                         (pi, cc) => cc.Resolve<IConfiguration>()["Infura:Url"]))
                 .AsSelf();
             builder
-                .RegisterType<BalancesRepository>()
-                .As<IBalancesRepository>();
+                .RegisterType<AddressesRepository>()
+                .As<IAddressesRepository>();
             builder
                 .RegisterType<AddressValidator>()
                 .As<IAddressValidator>();

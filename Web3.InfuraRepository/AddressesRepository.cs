@@ -8,16 +8,16 @@ using Web3.Core.Repositories.Exceptions;
 
 namespace Web3.InfuraRepository
 {
-    public class BalancesRepository : IBalancesRepository
+    public class AddressesRepository : IAddressesRepository
     {
         private readonly Nethereum.Web3.Web3 _web;
 
-        public BalancesRepository(Settings settings)
+        public AddressesRepository(Settings settings)
         {
             _web = new Nethereum.Web3.Web3(settings.Url);
         }
 
-        public async Task<Balance> GetAsync(string key)
+        public async Task<AddressInfo> GetAsync(string key)
         {
             try
             {
@@ -25,37 +25,37 @@ namespace Web3.InfuraRepository
             }
             catch (Exception ex)
             {
-                throw new RepositoryException("Can not get balance from Infura", ex);
+                throw new RepositoryException("Can not get info from Infura", ex);
             }
         }
 
-        public Task<IEnumerable<Balance>> GetAllAsync(Expression<Func<Balance, bool>> expression)
+        public Task<IEnumerable<AddressInfo>> GetAllAsync(Expression<Func<AddressInfo, bool>> expression)
         {
             throw new NotImplementedException();
         }
 
-        public Task AddAsync(Balance entity)
+        public Task AddAsync(AddressInfo entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Balance> UpdateAsync(Balance entity)
+        public Task<AddressInfo> UpdateAsync(AddressInfo entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(Balance entity)
+        public Task DeleteAsync(AddressInfo entity)
         {
             throw new NotImplementedException();
         }
 
-        private async Task<Balance> GetInternalAsync(string address)
+        private async Task<AddressInfo> GetInternalAsync(string address)
         {
             var weiBalance = await _web.Eth.GetBalance.SendRequestAsync(address);
             var ethBalance = Nethereum.Web3.Web3.Convert.FromWei(weiBalance);
-            var balance = new Balance
+            var balance = new AddressInfo
             {
-                Address = address,
+                Id = address,
                 Value = ethBalance
             };
             return balance;

@@ -1,4 +1,4 @@
-namespace Web3.Api.Balances
+namespace Web3.Api.Addresses
 {
     public interface IAddressValidator
     {
