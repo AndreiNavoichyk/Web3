@@ -10,6 +10,7 @@ namespace Web3.Api.Balances.Controllers.V1
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
+    [Produces("application/json")]
     public class BalancesController : ControllerBase
     {
         private readonly ILogger<BalancesController> _logger;
@@ -26,7 +27,24 @@ namespace Web3.Api.Balances.Controllers.V1
             _repository = repository;
         }
 
+        /// <summary>
+        /// Gets balance.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     Get /Balances/0xDc45F6F4D6220bBA0a046AAF5cc1D1D086aCe4D0
+        ///
+        /// </remarks>
+        /// <param name="address"></param>
+        /// <returns>The balance for the provided address</returns>
+        /// <response code="200">Returns the balance for the provided address</response>
+        /// <response code="400">If the address is incorrect</response>
+        /// <response code="404">If the error occured while balance was getting</response>   
         [HttpGet("{address}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> Get(string address)
         {
             if (_addressValidator.Validate(address))

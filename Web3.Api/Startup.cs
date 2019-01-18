@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 using Web3.Api.Composition;
 
 namespace Web3.Api
@@ -27,6 +28,7 @@ namespace Web3.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddApiVersioning();
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1.0", new Info {Title = "Web3 API", Version = "v1.0"}); });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -44,6 +46,12 @@ namespace Web3.Api
             {
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Web3 Api v1.0");
+            });
 
             app.UseHttpsRedirection();
             app.UseMvc();
