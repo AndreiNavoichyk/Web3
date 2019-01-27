@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Web3.Core.Models;
-using Web3.Core.Repositories;
+using Web3.Core.Addresses;
+using Web3.Core.Addresses.Models;
 
 namespace Web3.Api.Addresses.Controllers.V1
 {

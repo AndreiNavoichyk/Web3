@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Web3.Core.Repositories
+namespace Web3.Infra.Repositories
 {
     public interface IRepository<TEntity, in TKey> : IQueryableRepository<TEntity, TKey>
         where TEntity : class

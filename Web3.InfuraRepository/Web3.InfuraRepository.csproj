@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Web3.Core\Web3.Core.csproj" />
+    <ProjectReference Include="..\Web3.Infra\Web3.Infra.csproj" />
+    <ProjectReference Include="..\Web3.SmartContracts\Web3.SmartContracts.csproj" />
   </ItemGroup>
 
 </Project>

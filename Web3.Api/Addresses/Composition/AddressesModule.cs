@@ -1,8 +1,9 @@
 ﻿using Autofac;
 using Autofac.Core;
 using Microsoft.Extensions.Configuration;
-using Web3.Core.Repositories;
+using Web3.Core.Addresses;
 using Web3.InfuraRepository;
+using Web3.InfuraRepository.Addresses;
 
 namespace Web3.Api.Addresses.Composition
 {

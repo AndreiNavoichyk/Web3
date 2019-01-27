@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Threading.Tasks;
-using Web3.Core.Repositories;
-using Web3.Core.Repositories.Exceptions;
 using Web3.Core.TokenHoldings.Models;
+using Web3.Infra.Repositories;
+using Web3.Infra.Repositories.Exceptions;
+using Web3.SmartContracts;
 
-namespace Web3.InfuraRepository
+namespace Web3.InfuraRepository.TokenHoldings
 {
     public class TokenHoldingsRepository : IRepository<TokenHoldingInfo, (string address, string tokenAddress)>
     {

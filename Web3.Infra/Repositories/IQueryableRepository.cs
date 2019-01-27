@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Web3.Core.Repositories
+namespace Web3.Infra.Repositories
 {
     public interface IQueryableRepository<TEntity, in TKey>
         where TEntity : class

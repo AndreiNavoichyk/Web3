@@ -1,4 +1,4 @@
-﻿namespace Web3.Core.Models
+﻿namespace Web3.Core.Addresses.Models
 {
     public class AddressInfo
     {

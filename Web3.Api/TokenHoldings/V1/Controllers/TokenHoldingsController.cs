@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Web3.Api.Addresses;
 using Web3.Api.TokenHoldings.V1.Dtos;
-using Web3.Core.Repositories;
-using Web3.Core.Repositories.Exceptions;
 using Web3.Core.TokenHoldings;
 using Web3.Core.TokenHoldings.Models;
+using Web3.Infra.Repositories;
+using Web3.Infra.Repositories.Exceptions;
 
 namespace Web3.Api.TokenHoldings.V1.Controllers
 {
@@ -118,7 +118,7 @@ namespace Web3.Api.TokenHoldings.V1.Controllers
                 Address = tokenInfo.Address,
                 Title = tokenInfo.Title
             };
-            var tokenHoldingInfo = await _tokenHoldingsRepository.GetAsync((address: address, contractAddress: tokenInfo.Address));
+            var tokenHoldingInfo = await _tokenHoldingsRepository.GetAsync((address: address, tokenAddress: tokenInfo.Address));
             tokenHoldingInfoDto.Value = tokenHoldingInfo.Value;
             return tokenHoldingInfoDto;
         }

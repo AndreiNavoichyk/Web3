@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Web3.Core.Models;
-using Web3.Core.Repositories;
-using Web3.Core.Repositories.Exceptions;
+using Web3.Core.Addresses;
+using Web3.Core.Addresses.Models;
+using Web3.Infra.Repositories.Exceptions;
 
-namespace Web3.InfuraRepository
+namespace Web3.InfuraRepository.Addresses
 {
     public class AddressesRepository : IAddressesRepository
     {

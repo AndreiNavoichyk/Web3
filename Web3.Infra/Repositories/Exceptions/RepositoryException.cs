@@ -1,7 +1,7 @@
 ﻿using System;
-using Web3.Core.Exceptions;
+using Web3.Infra.Exceptions;
 
-namespace Web3.Core.Repositories.Exceptions
+namespace Web3.Infra.Repositories.Exceptions
 {
     public class RepositoryException : AppException
     {

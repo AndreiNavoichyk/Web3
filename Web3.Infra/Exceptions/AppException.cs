@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Web3.Core.Exceptions
+namespace Web3.Infra.Exceptions
 {
     public class AppException : Exception
     {
