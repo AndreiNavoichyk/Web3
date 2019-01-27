@@ -40,7 +40,7 @@ namespace Web3.Api.Addresses.V1.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Get(string id)
+        public async Task<IActionResult> Get(string id = "0xDc45F6F4D6220bBA0a046AAF5cc1D1D086aCe4D0")
         {
             if (_addressValidator.Validate(id))
             {

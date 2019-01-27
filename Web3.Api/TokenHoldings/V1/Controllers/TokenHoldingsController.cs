@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Web3.Api.Addresses;
 using Web3.Api.TokenHoldings.V1.Dtos;
 using Web3.Core.TokenHoldings;
 using Web3.Core.TokenHoldings.Models;
@@ -56,7 +55,7 @@ namespace Web3.Api.TokenHoldings.V1.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetAsync(string id)
+        public async Task<IActionResult> GetAsync(string id = "0x4E9ce36E442e55EcD9025B9a6E0D88485d628A67")
         {
             if (_addressValidator.Validate(id))
             {
