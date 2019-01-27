@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Web3.Core.Addresses.Models;
 using Web3.Core.Utils;
+using Web3.Infra.Exceptions;
 using Web3.Infra.Repositories;
 
 namespace Web3.Api.Addresses.V1.Controllers
@@ -36,11 +38,14 @@ namespace Web3.Api.Addresses.V1.Controllers
         /// <response code="200">Returns the info for the provided address</response>
         /// <response code="400">If the address is incorrect</response>
         /// <response code="404">If the error occured while info was getting</response>   
+        /// <response code="500">If some error occured while info was getting</response>   
         [HttpGet("{id}")]
+        [ActionName("get")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Get(string id = "0xDc45F6F4D6220bBA0a046AAF5cc1D1D086aCe4D0")
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetAsync(string id = "0xDc45F6F4D6220bBA0a046AAF5cc1D1D086aCe4D0")
         {
             if (_addressValidator.Validate(id))
             {
@@ -48,11 +53,17 @@ namespace Web3.Api.Addresses.V1.Controllers
                 {
                     return new OkObjectResult(await GetAddressInfo(id));
                 }
-                catch (Exception ex)
+                catch (AppException ex)
                 {
                     _logger.LogError($"Can not get info for address:{id}", ex);
 
                     return new NotFoundResult();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError($"Some error occured during address info getting for address:{id}", ex);
+                    
+                    return new StatusCodeResult(StatusCodes.Status500InternalServerError);
                 }
             }
             else

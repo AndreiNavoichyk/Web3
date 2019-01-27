@@ -9,8 +9,8 @@ using Web3.Api.TokenHoldings.V1.Dtos;
 using Web3.Core.TokenHoldings;
 using Web3.Core.TokenHoldings.Models;
 using Web3.Core.Utils;
+using Web3.Infra.Exceptions;
 using Web3.Infra.Repositories;
-using Web3.Infra.Repositories.Exceptions;
 
 namespace Web3.Api.TokenHoldings.V1.Controllers
 {
@@ -63,15 +63,15 @@ namespace Web3.Api.TokenHoldings.V1.Controllers
                 {
                     return new OkObjectResult(await GetTokenHoldingsAsync(id));
                 }
-                catch (Exception e) when (e is RepositoryException)
+                catch (AppException ex)
                 {
-                    _logger.LogError($"Can not get token holdings info for address:{id}", e);
+                    _logger.LogError($"Can not get token holdings info for address:{id}", ex);
 
                     return new NotFoundResult();
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    _logger.LogError($"Some error occured during token holdings info getting for address:{id}", e);
+                    _logger.LogError($"Some error occured during token holdings info getting for address:{id}", ex);
 
                     return new StatusCodeResult(StatusCodes.Status500InternalServerError);
                 }
