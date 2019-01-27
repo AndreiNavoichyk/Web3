@@ -1,4 +1,4 @@
-﻿namespace Web3.InfuraRepository
+﻿namespace Web3.Infura
 {
     public class Settings
     {

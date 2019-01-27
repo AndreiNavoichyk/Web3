@@ -8,7 +8,7 @@ using Web3.Infra.Repositories;
 using Web3.Infra.Repositories.Exceptions;
 using Web3.SmartContracts;
 
-namespace Web3.InfuraRepository.TokenHoldings
+namespace Web3.Infura.TokenHoldings
 {
     public class TokenHoldingsRepository : IRepository<TokenHoldingInfo, (string address, string tokenAddress)>
     {

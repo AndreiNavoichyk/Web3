@@ -2,7 +2,7 @@ using Autofac;
 using Web3.Core.TokenHoldings;
 using Web3.Core.TokenHoldings.Models;
 using Web3.Infra.Repositories;
-using Web3.InfuraRepository.TokenHoldings;
+using Web3.Infura.TokenHoldings;
 
 namespace Web3.Api.TokenHoldings.Composition
 {

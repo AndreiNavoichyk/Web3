@@ -6,7 +6,7 @@ using Web3.Core.Addresses.Models;
 using Web3.Infra.Repositories;
 using Web3.Infra.Repositories.Exceptions;
 
-namespace Web3.InfuraRepository.Addresses
+namespace Web3.Infura.Addresses
 {
     public class AddressesRepository : IRepository<AddressInfo, string>
     {

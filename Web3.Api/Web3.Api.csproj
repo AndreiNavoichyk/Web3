@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Web3.Core\Web3.Core.csproj" />
-    <ProjectReference Include="..\Web3.InfuraRepository\Web3.InfuraRepository.csproj" />
+    <ProjectReference Include="..\Web3.Infura\Web3.Infura.csproj" />
   </ItemGroup>
 
   <ItemGroup>
