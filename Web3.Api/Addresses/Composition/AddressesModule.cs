@@ -2,6 +2,8 @@
 using Autofac.Core;
 using Microsoft.Extensions.Configuration;
 using Web3.Core.Addresses;
+using Web3.Core.Addresses.Models;
+using Web3.Infra.Repositories;
 using Web3.InfuraRepository;
 using Web3.InfuraRepository.Addresses;
 
@@ -20,7 +22,8 @@ namespace Web3.Api.Addresses.Composition
                 .AsSelf();
             builder
                 .RegisterType<AddressesRepository>()
-                .As<IAddressesRepository>();
+                .As<IRepository<AddressInfo, string>>()
+                .As<IQueryableRepository<AddressInfo, string>>();
             builder
                 .RegisterType<AddressValidator>()
                 .As<IAddressValidator>();

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Web3.Core.Addresses;
 using Web3.Core.Addresses.Models;
+using Web3.Infra.Repositories;
 using Web3.Infra.Repositories.Exceptions;
 
 namespace Web3.InfuraRepository.Addresses
 {
-    public class AddressesRepository : IAddressesRepository
+    public class AddressesRepository : IRepository<AddressInfo, string>
     {
         private readonly Nethereum.Web3.Web3 _web;
 

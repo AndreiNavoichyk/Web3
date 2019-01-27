@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Web3.Core.Addresses;
 using Web3.Core.Addresses.Models;
+using Web3.Infra.Repositories;
 
 namespace Web3.Api.Addresses.Controllers.V1
 {
@@ -15,12 +15,12 @@ namespace Web3.Api.Addresses.Controllers.V1
     {
         private readonly ILogger<AddressesController> _logger;
         private readonly IAddressValidator _addressValidator;
-        private readonly IAddressesRepository _repository;
+        private readonly IQueryableRepository<AddressInfo, string> _repository;
 
         public AddressesController(
             ILogger<AddressesController> logger,
             IAddressValidator addressValidator,
-            IAddressesRepository repository)
+            IQueryableRepository<AddressInfo, string> repository)
         {
             _logger = logger;
             _addressValidator = addressValidator;
