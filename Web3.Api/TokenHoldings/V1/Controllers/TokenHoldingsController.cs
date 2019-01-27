@@ -9,6 +9,7 @@ using Web3.Api.Addresses;
 using Web3.Api.TokenHoldings.V1.Dtos;
 using Web3.Core.TokenHoldings;
 using Web3.Core.TokenHoldings.Models;
+using Web3.Core.Utils;
 using Web3.Infra.Repositories;
 using Web3.Infra.Repositories.Exceptions;
 

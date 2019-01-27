@@ -1,8 +1,8 @@
 using Nethereum.Util;
 
-namespace Web3.Api.Addresses
+namespace Web3.Core.Utils
 {
-    internal class AddressValidator : IAddressValidator
+    public class AddressValidator : IAddressValidator
     {
         public bool Validate(string address)
         {

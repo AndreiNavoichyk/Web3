@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using Autofac.Core;
 using Microsoft.Extensions.Configuration;
-using Web3.Core.Addresses;
 using Web3.Core.Addresses.Models;
+using Web3.Core.Utils;
 using Web3.Infra.Repositories;
 using Web3.InfuraRepository;
 using Web3.InfuraRepository.Addresses;

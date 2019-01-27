@@ -1,4 +1,4 @@
-namespace Web3.Api.Addresses
+namespace Web3.Core.Utils
 {
     public interface IAddressValidator
     {

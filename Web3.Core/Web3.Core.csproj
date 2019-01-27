@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Web3.Infra\Web3.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Nethereum.Web3" Version="3.0.0" />
+  </ItemGroup>
+
 </Project>
