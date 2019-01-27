@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Web3.Api.Composition;
+using Web3.Api.Swagger;
 
 namespace Web3.Api
 {
@@ -28,7 +29,11 @@ namespace Web3.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddApiVersioning();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1.0", new Info {Title = "Web3 API", Version = "v1.0"}); });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1.0", new Info {Title = "Web3 API", Version = "v1.0"});
+                c.DocumentFilter<LowercaseDocumentFilter>();
+            });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
