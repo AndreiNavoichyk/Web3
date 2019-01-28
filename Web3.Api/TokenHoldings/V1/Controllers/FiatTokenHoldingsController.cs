@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -57,8 +58,8 @@ namespace Web3.Api.TokenHoldings.V1.Controllers
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetAsync(
             string address = "0x4E9ce36E442e55EcD9025B9a6E0D88485d628A67",
-            string tokenAddress = "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
-            string currencySymbol = "USD")
+            [Required] string tokenAddress = "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
+            [Required] string currencySymbol = "USD")
         {
             if (!_addressValidator.Validate(address))
             {
