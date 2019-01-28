@@ -54,7 +54,7 @@ namespace Web3.Infura.Addresses
             var ethBalance = Nethereum.Web3.Web3.Convert.FromWei(weiBalance);
             var balance = new AddressInfo
             {
-                Id = address,
+                Address = address,
                 Value = ethBalance
             };
             return balance;

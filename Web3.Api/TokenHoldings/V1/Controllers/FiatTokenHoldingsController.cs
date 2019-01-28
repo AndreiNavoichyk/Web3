@@ -41,52 +41,52 @@ namespace Web3.Api.TokenHoldings.V1.Controllers
         /// <summary>
         /// Gets fiat token holdings info.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="tokenId"></param>
+        /// <param name="address"></param>
+        /// <param name="tokenAddress"></param>
         /// <param name="currencySymbol"></param>
         /// <returns>The fiat token holdings info for the provided address provided ERC-20 token and currency symbol</returns>
         /// <response code="200">Returns fiat token holdings info for the provided address provided ERC-20 token and currency symbol</response>
         /// <response code="400">If the address is incorrect</response>
         /// <response code="404">If the error occured while fiat token holdings info was getting</response>
         /// <response code="500">If some error occured while fiat token holdings info was getting</response>
-        [HttpGet("{id}")]
+        [HttpGet("{address}")]
         [ActionName("get")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetAsync(
-            string id = "0x4E9ce36E442e55EcD9025B9a6E0D88485d628A67",
-            string tokenId = "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
+            string address = "0x4E9ce36E442e55EcD9025B9a6E0D88485d628A67",
+            string tokenAddress = "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
             string currencySymbol = "USD")
         {
-            if (!_addressValidator.Validate(id))
+            if (!_addressValidator.Validate(address))
             {
-                _logger.LogInformation($"Provided address:{id} is invalid");
+                _logger.LogInformation($"Provided address:{address} is invalid");
 
                 return new BadRequestResult();
             }
 
-            if (!_addressValidator.Validate(tokenId))
+            if (!_addressValidator.Validate(tokenAddress))
             {
-                _logger.LogInformation($"Provided token address:{tokenId} is invalid");
+                _logger.LogInformation($"Provided token address:{tokenAddress} is invalid");
 
                 return new BadRequestResult();
             }
 
             try
             {
-                return new OkObjectResult(await GetFiatTokenHoldingsInternalAsync(id, tokenId, currencySymbol));
+                return new OkObjectResult(await GetFiatTokenHoldingsInternalAsync(address, tokenAddress, currencySymbol));
             }
             catch (AppException ex)
             {
-                _logger.LogError($"Can not get fiat token holdings for address:{id}, tokenAddress:{tokenId} and currency:{currencySymbol}", ex);
+                _logger.LogError($"Can not get fiat token holdings for address:{address}, tokenAddress:{tokenAddress} and currency:{currencySymbol}", ex);
 
                 return new BadRequestResult();
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Some error occured during fiat token holdings getting for address:{id}, tokenAddress:{tokenId} and currency:{currencySymbol}", ex);
+                _logger.LogError($"Some error occured during fiat token holdings getting for address:{address}, tokenAddress:{tokenAddress} and currency:{currencySymbol}", ex);
                 
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }

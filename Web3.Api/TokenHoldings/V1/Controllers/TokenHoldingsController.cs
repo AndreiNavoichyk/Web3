@@ -42,42 +42,42 @@ namespace Web3.Api.TokenHoldings.V1.Controllers
         /// <summary>
         /// Gets token holdings info.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="address"></param>
         /// <returns>The token holdings info for top ERC-20 tokens for the provided address</returns>
         /// <response code="200">Returns token holdings info for top ERC-20 tokens for the provided address</response>
         /// <response code="400">If the address is incorrect</response>
         /// <response code="404">If the error occured while token holdings info was getting</response>
         /// <response code="500">If some error occured while token holdings info was getting</response>
-        [HttpGet("{id}")]
+        [HttpGet("{address}")]
         [ActionName("get")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetAsync(string id = "0x4E9ce36E442e55EcD9025B9a6E0D88485d628A67")
+        public async Task<IActionResult> GetAsync(string address = "0x4E9ce36E442e55EcD9025B9a6E0D88485d628A67")
         {
-            if (_addressValidator.Validate(id))
+            if (_addressValidator.Validate(address))
             {
                 try
                 {
-                    return new OkObjectResult(await GetTokenHoldingsAsync(id));
+                    return new OkObjectResult(await GetTokenHoldingsAsync(address));
                 }
                 catch (AppException ex)
                 {
-                    _logger.LogError($"Can not get token holdings info for address:{id}", ex);
+                    _logger.LogError($"Can not get token holdings info for address:{address}", ex);
 
                     return new NotFoundResult();
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError($"Some error occured during token holdings info getting for address:{id}", ex);
+                    _logger.LogError($"Some error occured during token holdings info getting for address:{address}", ex);
 
                     return new StatusCodeResult(StatusCodes.Status500InternalServerError);
                 }
             }
             else
             {
-                _logger.LogInformation($"Provided address:{id} is invalid");
+                _logger.LogInformation($"Provided address:{address} is invalid");
 
                 return new BadRequestResult();
             }
