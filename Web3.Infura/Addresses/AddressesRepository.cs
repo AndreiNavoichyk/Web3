@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.Linq;
 using System.Threading.Tasks;
 using Web3.Core.Addresses.Models;
 using Web3.Infra.Repositories;
@@ -8,7 +7,7 @@ using Web3.Infra.Repositories.Exceptions;
 
 namespace Web3.Infura.Addresses
 {
-    public class AddressesRepository : IRepository<AddressInfo, string>
+    public class AddressesRepository : RepositoryBase<AddressInfo, string>
     {
         private readonly Nethereum.Web3.Web3 _web;
 
@@ -17,7 +16,7 @@ namespace Web3.Infura.Addresses
             _web = new Nethereum.Web3.Web3(settings.Url);
         }
 
-        public async Task<AddressInfo> GetAsync(string key)
+        public override async Task<AddressInfo> GetAsync(string key)
         {
             try
             {
@@ -29,22 +28,22 @@ namespace Web3.Infura.Addresses
             }
         }
 
-        public Task<IEnumerable<AddressInfo>> GetAllAsync(Expression<Func<AddressInfo, bool>> expression)
+        protected override Task<IQueryable<AddressInfo>> GetAllInternalAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task AddAsync(AddressInfo entity)
+        public override Task AddAsync(AddressInfo entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<AddressInfo> UpdateAsync(AddressInfo entity)
+        public override Task<AddressInfo> UpdateAsync(AddressInfo entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(AddressInfo entity)
+        public override Task DeleteAsync(AddressInfo entity)
         {
             throw new NotImplementedException();
         }

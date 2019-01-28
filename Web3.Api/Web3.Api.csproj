@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="Addresses\V1" />
-    <Folder Include="TokenHoldings\V1" />
   </ItemGroup>
 
 </Project>

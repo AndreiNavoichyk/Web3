@@ -4,5 +4,6 @@ namespace Web3.Core.TokenHoldings.Models
     {
         public string Address { get; set; }
         public string Title { get; set; }
+        public string Symbol { get; set; }
     }
 }

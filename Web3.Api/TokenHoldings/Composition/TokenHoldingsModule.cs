@@ -1,5 +1,4 @@
 using Autofac;
-using Web3.Core.TokenHoldings;
 using Web3.Core.TokenHoldings.Models;
 using Web3.Infra.Repositories;
 using Web3.Infura.TokenHoldings;
@@ -11,8 +10,9 @@ namespace Web3.Api.TokenHoldings.Composition
         protected override void Load(ContainerBuilder builder)
         {
             builder
-                .RegisterType<FromConfigTokensProvider>()
-                .As<ITokensProvider>();
+                .RegisterType<FromConfigTokenInfosRepository>()
+                .As<IRepository<TokenInfo, string>>()
+                .As<IQueryableRepository<TokenInfo, string>>();
             builder
                 .RegisterType<TokenHoldingsRepository>()
                 .As<IRepository<TokenHoldingInfo, (string address, string tokenAddress)>>()

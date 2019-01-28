@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Web3.Infra.Repositories
@@ -9,6 +7,6 @@ namespace Web3.Infra.Repositories
         where TEntity : class
     {
         Task<TEntity> GetAsync(TKey key);
-        Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> expression);
+        Task<IList<TEntity>> GetAllAsync(QueryRequest<TEntity> queryRequest);
     }
 }

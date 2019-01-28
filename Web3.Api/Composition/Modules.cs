@@ -8,8 +8,13 @@ namespace Web3.Api.Composition
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterModule<HttpModule>();
+            builder.RegisterModule<ServicesModule>();
+            builder.RegisterModule<UtilsModule>();
+
             builder.RegisterModule<AddressesModule>();
             builder.RegisterModule<TokenHoldingsModule>();
+
             base.Load(builder);
         }
     }

@@ -1,6 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using Web3.Core.TokenHoldings.Models;
@@ -10,7 +9,7 @@ using Web3.SmartContracts;
 
 namespace Web3.Infura.TokenHoldings
 {
-    public class TokenHoldingsRepository : IRepository<TokenHoldingInfo, (string address, string tokenAddress)>
+    public class TokenHoldingsRepository : RepositoryBase<TokenHoldingInfo, (string address, string tokenAddress)>
     {
         private readonly Nethereum.Web3.Web3 _web3;
         
@@ -19,7 +18,7 @@ namespace Web3.Infura.TokenHoldings
             _web3 = new Nethereum.Web3.Web3(settings.Url);
         }
         
-        public async Task<TokenHoldingInfo> GetAsync((string address, string tokenAddress) key)
+        public override async Task<TokenHoldingInfo> GetAsync((string address, string tokenAddress) key)
         {
             try
             {
@@ -31,22 +30,22 @@ namespace Web3.Infura.TokenHoldings
             }
         }
 
-        public Task<IEnumerable<TokenHoldingInfo>> GetAllAsync(Expression<Func<TokenHoldingInfo, bool>> expression)
+        protected override Task<IQueryable<TokenHoldingInfo>> GetAllInternalAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task AddAsync(TokenHoldingInfo entity)
+        public override Task AddAsync(TokenHoldingInfo entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TokenHoldingInfo> UpdateAsync(TokenHoldingInfo entity)
+        public override Task<TokenHoldingInfo> UpdateAsync(TokenHoldingInfo entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(TokenHoldingInfo entity)
+        public override Task DeleteAsync(TokenHoldingInfo entity)
         {
             throw new NotImplementedException();
         }

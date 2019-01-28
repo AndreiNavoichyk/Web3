@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Web3.Api.TokenHoldings.V1.Dtos;
-using Web3.Core.TokenHoldings;
 using Web3.Core.TokenHoldings.Models;
 using Web3.Core.Utils;
 using Web3.Infra.Exceptions;
@@ -18,25 +17,25 @@ namespace Web3.Api.TokenHoldings.V1.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/token-holdings")]
     [Produces("application/json")]
-    public class BalancesController
+    public sealed class BalancesController : ControllerBase
     {
         private readonly ILogger<BalancesController> _logger;
         private readonly IAddressValidator _addressValidator;
         private readonly TokenHoldingsSettings _tokenHoldingsSettings;
-        private readonly ITokensProvider _tokensProvider;
+        private readonly IQueryableRepository<TokenInfo, string> _tokenInfosRepository;
         private readonly IQueryableRepository<TokenHoldingInfo, (string address, string tokenAddress)> _tokenHoldingsRepository;
 
         public BalancesController(
             ILogger<BalancesController> logger,
             IAddressValidator addressValidator,
             TokenHoldingsSettings tokenHoldingsSettings,
-            ITokensProvider tokensProvider,
+            IQueryableRepository<TokenInfo, string> tokenInfosRepository,
             IQueryableRepository<TokenHoldingInfo, (string address, string tokenAddress)> tokenHoldingsRepository)
         {
             _logger = logger;
             _addressValidator = addressValidator;
             _tokenHoldingsSettings = tokenHoldingsSettings;
-            _tokensProvider = tokensProvider;
+            _tokenInfosRepository = tokenInfosRepository;
             _tokenHoldingsRepository = tokenHoldingsRepository;
         }
 
@@ -88,8 +87,12 @@ namespace Web3.Api.TokenHoldings.V1.Controllers
         private async Task<TokenHoldingsDto> GetTokenHoldingsAsync(string address)
         {
             _logger.LogTrace($"Getting the top tokens list");
-            
-            var tokens = await _tokensProvider.GetAsync(_tokenHoldingsSettings.TopTokensNumber);
+
+            var tokens = await _tokenInfosRepository.GetAllAsync(
+                new QueryRequest<TokenInfo>
+                {
+                    Take = _tokenHoldingsSettings.TopTokensNumber
+                });
 
             _logger.LogTrace($"Getting token holdings info for address:{address}");
             
@@ -116,7 +119,8 @@ namespace Web3.Api.TokenHoldings.V1.Controllers
             var tokenHoldingInfoDto = new TokenHoldingInfoDto
             {
                 Address = tokenInfo.Address,
-                Title = tokenInfo.Title
+                Title = tokenInfo.Title,
+                Symbol = tokenInfo.Symbol
             };
             var tokenHoldingInfo = await _tokenHoldingsRepository.GetAsync((address: address, tokenAddress: tokenInfo.Address));
             tokenHoldingInfoDto.Value = tokenHoldingInfo.Value;
